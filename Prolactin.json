@@ -1,0 +1,267 @@
+{
+    "resourceType": "Bundle",
+    "id": "ptn-Prolactin",
+    "meta": {
+        "versionId": "11",
+        "lastUpdated": "2025-01-18T00:38:56.163+00:00",
+        "source": "#TfxfCL2LnaRfQzKe"
+    },
+    "type": "collection",
+    "entry": [
+        {
+            "fullUrl": "DiagnosticReport/33729808620.LCLS.2024-12-02.2024-12-02.004465",
+            "resource": {
+                "resourceType": "DiagnosticReport",
+                "id": "33729808620.LCLS.2024-12-02.2024-12-02.004465",
+                "meta": {
+                    "lastUpdated": "2024-12-03T09:37:45-05:00",
+                    "profile": [
+                        "http://labcorp.com/fhir/er/StructureDefinition/diagnosticreport-panel"
+                    ]
+                },
+                "identifier": [
+                    {
+                        "id": "33729808620.LCLS.2024-12-02.2024-12-02.004465",
+                        "system": "http://terminology.labcorp.com/CodeSystem/diagnostic-report"
+                    }
+                ],
+                "status": "final",
+                "category": [
+                    {
+                        "coding": [
+                            {
+                                "system": "http://hl7.org/fhir/v2/0074",
+                                "code": "LAB"
+                            }
+                        ]
+                    }
+                ],
+                "code": {
+                    "coding": [
+                        {
+                            "system": "http://terminology.labcorp.com/CodeSystem/lcls-test-code",
+                            "code": "004465",
+                            "display": "Prolactin"
+                        },
+                        {
+                            "system": "http://loinc.org",
+                            "code": "2842-3"
+                        }
+                    ],
+                    "text": "Prolactin"
+                },
+                "subject": {
+                    "reference": "Patient/1234"
+                },
+                "effectiveDateTime": "2024-12-02T08:49:00-05:00",
+                "issued": "2024-12-03T09:10:00-05:00",
+                "performer": [
+                    {
+                        "display": "Organization/Labcorp"
+                    }
+                ],
+                "specimen": [
+                    {
+                        "reference": "Specimen/33729808620.LCLS.2024-12-02.2024-12-02"
+                    }
+                ],
+                "result": [
+                    {
+                        "reference": "Observation/33729808620.LCLS.2024-12-02.2024-12-02.004465.1",
+                        "display": "Prolactin"
+                    }
+                ]
+            }
+        },
+        {
+            "fullUrl": "Specimen/33729808620.LCLS.2024-12-02.2024-12-02",
+            "resource": {
+                "resourceType": "Specimen",
+                "id": "33729808620.LCLS.2024-12-02.2024-12-02",
+                "meta": {
+                    "tag": [
+                        {
+                            "system": "http://terminology.labcorp.com/CodeSystem/tags/global_search",
+                            "code": "BLOCKED:ORDERING_ACCOUNT.BLOCKED",
+                            "display": "BLOCKED:ORDERING_ACCOUNT.BLOCKED"
+                        }
+                    ]
+                },
+                "accessionIdentifier": {
+                    "type": {
+                        "coding": [
+                            {
+                                "system": "http://terminology.hl7.org/CodeSystem/v2-0203",
+                                "code": "ACSN",
+                                "display": "Accession ID"
+                            }
+                        ]
+                    },
+                    "system": "http://labcorp.com/fhir/sid/lab/lcls",
+                    "value": "33729808620"
+                },
+                "receivedTime": "2024-12-02T00:00:00-05:00",
+                "collection": {
+                    "collectedDateTime": "2024-12-02T08:49:00-05:00",
+                    "fastingStatusCodeableConcept": {
+                        "coding": [
+                            {
+                                "system": "http://terminology.hl7.org/ValueSet/v2-0916",
+                                "code": "F",
+                                "display": "Patient was fasting prior to the procedure."
+                            }
+                        ]
+                    }
+                }
+            }
+        },
+        {
+            "fullUrl": "Observation/33729808620.LCLS.2024-12-02.2024-12-02.004465.1",
+            "resource": {
+                "resourceType": "Observation",
+                "id": "33729808620.LCLS.2024-12-02.2024-12-02.004465.1",
+                "meta": {
+                    "profile": [
+                        "http://labcorp.com/fhir/er/StructureDefinition/observation-result"
+                    ]
+                },
+                "status": "final",
+                "category": [
+                    {
+                        "coding": [
+                            {
+                                "system": "http://terminology.hl7.org/CodeSystem/observation-category",
+                                "code": "laboratory"
+                            }
+                        ]
+                    }
+                ],
+                "code": {
+                    "coding": [
+                        {
+                            "system": "http://terminology.labcorp.com/CodeSystem/lcls-test-code",
+                            "code": "004467",
+                            "display": "Prolactin"
+                        },
+                        {
+                            "system": "http://loinc.org",
+                            "code": "2842-3",
+                            "display": "Prolactin"
+                        }
+                    ]
+                },
+                "subject": {
+                    "reference": "Patient/1234"
+                },
+                "effectiveDateTime": "2024-12-02T08:49:00-05:00",
+                "issued": "2024-12-03T09:10:00-05:00",
+                "valueQuantity": {
+                    "value": 1220,
+                    "unit": "ng/mL",
+                    "system": "http://unitsofmeasure.org"
+                },
+                "interpretation": [
+                    {
+                        "coding": [
+                            {
+                                "system": "http://terminology.hl7.org/CodeSystem/v3-ObservationInterpretation",
+                                "code": "H",
+                                "display": "High"
+                            }
+                        ]
+                    }
+                ],
+                "specimen": {
+                    "reference": "Specimen/33729808620.LCLS.2024-12-02.2024-12-02"
+                },
+                "referenceRange": [
+                    {
+                        "low": {
+                            "value": 4.8,
+                            "unit": "ng/mL"
+                        },
+                        "high": {
+                            "value": 33.4,
+                            "unit": "ng/mL"
+                        },
+                        "text": "4.8-33.4 ng/mL"
+                    }
+                ]
+            }
+        },
+        {
+            "fullUrl": "Patient/PT10199050020",
+            "resource": {
+                "resourceType": "Patient",
+                "id": "PT10199050020",
+                "meta": {
+                    "profile": [
+                        "http://labcorp.com/fhir/er/StructureDefinition/patient"
+                    ]
+                },
+                "name": [
+                    {
+                        "text": "VERA STENG"
+                    }
+                ],
+                "gender": "male",
+                "birthDate": "1965-01-01",
+                "generalPractitioner": [
+                    {
+                        "reference": "PractitionerRole/05021400PHY10199050020"
+                    }
+                ],
+                "managingOrganization": {
+                    "reference": "Organization/05021400"
+                }
+            }
+        },
+        {
+            "fullUrl": "Parameters/ReportPreferences",
+            "resource": {
+                "resourceType": "Parameters",
+                "id": "ReportPreferences",
+                "meta": {
+                    "profile": [
+                        "http://labcorp.com/fhir/patient-portal-cds/StructureDefinition/parameters-report-preferences"
+                    ]
+                },
+                "parameter": [
+                    {
+                        "name": "OrderSource",
+                        "valueCodeableConcept": {
+                            "coding": [
+                                {
+                                    "system": "http://hl7.org/fhir/resource-types",
+                                    "code": "Patient",
+                                    "display": "Patient"
+                                }
+                            ]
+                        }
+                    },
+                    {
+                        "name": "Composition",
+                        "valueCanonical": "http://labcorp.com/fhir/patient-portal-cds/StructureDefinition/composition-results-view"
+                    },
+                    {
+                        "name": "UseContext",
+                        "valueUsageContext": {
+                            "code": {
+                                "system": "http://terminology.hl7.org/CodeSystem/usage-context-type",
+                                "code": "program"
+                            },
+                            "valueCodeableConcept": {
+                                "coding": [
+                                    {
+                                        "system": "http://labcorp.com/fhir/patient-portal-cds/CodeSystem/program",
+                                        "code": "patient-portal-results"
+                                    }
+                                ]
+                            }
+                        }
+                    }
+                ]
+            }
+        }
+    ]
+}

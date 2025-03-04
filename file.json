@@ -1,0 +1,337 @@
+{
+  "resourceType": "Bundle",
+  "id": "ptn-Vitamin-Package",
+  "meta": {
+    "profile": [
+      "http://labcorp.com/fhir/cds/StructureDefinition/scenario-bundle"
+    ]
+  },
+  "type": "collection",
+  "entry": [
+    {
+      "resource": {
+        "resourceType": "Patient",
+        "id": "3351505492270722",
+        "text": {
+          "status": "generated",
+          "div": "<div xmlns=\"http://www.w3.org/1999/xhtml\"><div class=\"hapiHeaderText\">Joanne \n                     <b>SMITH </b></div><table class=\"hapiPropertyTable\"><tbody><tr><td>Date of birth</td><td><span>01 January 1991</span></td></tr></tbody></table></div>"
+        },
+        "extension": [
+          {
+            "url": "http://hl7.org/fhir/us/core/StructureDefinition/us-core-birthsex",
+            "valueCode": "F"
+          }
+        ],
+        "name": [
+          {
+            "family": "Bartlet",
+            "given": [
+              "Pear"
+            ]
+          }
+        ],
+        "gender": "female",
+        "birthDate": "1977-01-01"
+      }
+    },
+    {
+      "fullUrl": "Observation/00899050010.LCLS.2024-01-08.2024-01-07.001503.1",
+      "resource": {
+        "resourceType": "Observation",
+        "id": "00899050010.LCLS.2024-01-08.2024-01-07.001503.1",
+        "meta": {
+          "lastUpdated": "2024-01-08T15:01:54.000-05:00",
+          "profile": [
+            "http://labcorp.com/fhir/er/StructureDefinition/observation-result"
+          ]
+        },
+        "status": "final",
+        "category": [
+          {
+            "coding": [
+              {
+                "system": "http://terminology.hl7.org/CodeSystem/observation-category",
+                "code": "laboratory",
+                "display": "Laboratory"
+              }
+            ]
+          }
+        ],
+        "code": {
+          "coding": [
+            {
+              "system": "http://terminology.labcorp.com/CodeSystem/lcls-test-code",
+              "code": "001503",
+              "display": "Vitamin B12"
+            },
+            {
+              "system": "http://loinc.org",
+              "code": "2132-9",
+              "display": "Cobalamins"
+            },
+            {
+              "system": "http://terminology.labcorp.com/CodeSystem/lcls-procedure-class",
+              "code": "RI",
+              "display": "RI"
+            }
+          ]
+        },
+        "subject": {
+          "reference": "Patient/PT00899050010"
+        },
+        "effectiveDateTime": "2024-01-07T00:00:00-05:00",
+        "issued": "2024-01-08T15:02:00.000-05:00",
+        "performer": [
+          {
+            "reference": "PractitionerRole/performer-role-01"
+          }
+        ],
+        "valueQuantity": {
+          "value": 300,
+          "unit": "pg/mL",
+          "system": "http://unitsofmeasure.org"
+        },
+        "interpretation": [
+          {
+            "coding": [
+              {
+                "system": "http://terminology.hl7.org/CodeSystem/v3-ObservationInterpretation",
+                "code": "N",
+                "display": "Normal"
+              }
+            ]
+          }
+        ],
+        "specimen": {
+          "reference": "Specimen/00899050010.LCLS.2024-01-08.2024-01-07"
+        },
+        "referenceRange": [
+          {
+            "low": {
+              "value": 232,
+              "unit": "pg/mL"
+            },
+            "high": {
+              "value": 1245,
+              "unit": "pg/mL"
+            },
+            "text": "232-1245 pg/mL"
+          }
+        ]
+      }
+    },
+    {
+      "fullUrl": "Observation/00899050010.LCLS.2024-01-08.2024-01-07.002020.2",
+      "resource": {
+        "resourceType": "Observation",
+        "id": "00899050010.LCLS.2024-01-08.2024-01-07.002020.2",
+        "meta": {
+          "lastUpdated": "2024-01-08T15:01:54.000-05:00",
+          "profile": [
+            "http://labcorp.com/fhir/er/StructureDefinition/observation-result"
+          ]
+        },
+        "status": "final",
+        "category": [
+          {
+            "coding": [
+              {
+                "system": "http://terminology.hl7.org/CodeSystem/observation-category",
+                "code": "laboratory",
+                "display": "Laboratory"
+              }
+            ]
+          }
+        ],
+        "code": {
+          "coding": [
+            {
+              "system": "http://terminology.labcorp.com/CodeSystem/lcls-test-code",
+              "code": "002020",
+              "display": "Folate (Folic Acid), Serum"
+            },
+            {
+              "system": "http://loinc.org",
+              "code": "2284-8",
+              "display": "Folate"
+            },
+            {
+              "system": "http://terminology.labcorp.com/CodeSystem/lcls-procedure-class",
+              "code": "RI",
+              "display": "RI"
+            }
+          ]
+        },
+        "subject": {
+          "reference": "Patient/PT00899050010"
+        },
+        "effectiveDateTime": "2024-01-07T00:00:00-05:00",
+        "issued": "2024-01-08T15:02:00.000-05:00",
+        "performer": [
+          {
+            "reference": "PractitionerRole/performer-role-01"
+          }
+        ],
+        "valueQuantity": {
+          "value": 5,
+          "unit": "ng/mL",
+          "system": "http://unitsofmeasure.org"
+        },
+        "interpretation": [
+          {
+            "coding": [
+              {
+                "system": "http://terminology.hl7.org/CodeSystem/v3-ObservationInterpretation",
+                "code": "N",
+                "display": "Normal"
+              }
+            ]
+          }
+        ],
+        "specimen": {
+          "reference": "Specimen/00899050010.LCLS.2024-01-08.2024-01-07"
+        },
+        "referenceRange": [
+          {
+            "text": ">3.0 ng/mL"
+          }
+        ]
+      }
+    },
+    {
+      "fullUrl": "Observation/00899050010.LCLS.2024-01-08.2024-01-07.081953.1",
+      "resource": {
+        "resourceType": "Observation",
+        "id": "00899050010.LCLS.2024-01-08.2024-01-07.081953.1",
+        "meta": {
+          "lastUpdated": "2024-01-08T15:01:54.000-05:00",
+          "profile": [
+            "http://labcorp.com/fhir/er/StructureDefinition/observation-result"
+          ]
+        },
+        "status": "final",
+        "category": [
+          {
+            "coding": [
+              {
+                "system": "http://terminology.hl7.org/CodeSystem/observation-category",
+                "code": "laboratory",
+                "display": "Laboratory"
+              }
+            ]
+          }
+        ],
+        "code": {
+          "coding": [
+            {
+              "system": "http://terminology.labcorp.com/CodeSystem/lcls-test-code",
+              "code": "081953",
+              "display": "Vitamin D, 25-Hydroxy"
+            },
+            {
+              "system": "http://loinc.org",
+              "code": "62292-8",
+              "display": "Calcidiol+ercalcidiol"
+            },
+            {
+              "system": "http://terminology.labcorp.com/CodeSystem/lcls-procedure-class",
+              "code": "RI",
+              "display": "RI"
+            }
+          ]
+        },
+        "subject": {
+          "reference": "Patient/PT00899050010"
+        },
+        "effectiveDateTime": "2024-01-07T00:00:00-05:00",
+        "issued": "2024-01-08T15:02:00.000-05:00",
+        "performer": [
+          {
+            "reference": "PractitionerRole/performer-role-02"
+          }
+        ],
+        "valueQuantity": {
+          "value": 17.9,
+          "unit": "ng/mL",
+          "system": "http://unitsofmeasure.org"
+        },
+        "interpretation": [
+          {
+            "coding": [
+              {
+                "system": "http://terminology.hl7.org/CodeSystem/v3-ObservationInterpretation",
+                "code": "L",
+                "display": "Low"
+              }
+            ]
+          }
+        ],
+        "specimen": {
+          "reference": "Specimen/00899050010.LCLS.2024-01-08.2024-01-07"
+        },
+        "referenceRange": [
+          {
+            "low": {
+              "value": 30,
+              "unit": "ng/mL"
+            },
+            "high": {
+              "value": 100,
+              "unit": "ng/mL"
+            },
+            "text": "30.0-100.0 ng/mL"
+          }
+        ]
+      }
+    },
+    {
+      "fullUrl": "https://ent-fhir.alp14h.cws.labcorp.com/fhir/Parameters/ReportPreferencesPatient",
+      "resource": {
+        "resourceType": "Parameters",
+        "id": "ReportPreferencesPatient",
+        "meta": {
+          "versionId": "1",
+          "lastUpdated": "2024-01-31T08:59:01.690+00:00",
+          "source": "#0A5NTQF59Dmdk1tG",
+          "profile": [
+            "http://labcorp.com/fhir/patient-portal-cds/StructureDefinition/parameters-report-preferences"
+          ]
+        },
+        "parameter": [
+          {
+            "name": "OrderSource",
+            "valueCodeableConcept": {
+              "coding": [
+                {
+                  "system": "http://hl7.org/fhir/resource-types",
+                  "code": "Practitioner"
+                }
+              ]
+            }
+          },
+          {
+            "name": "UseContext",
+            "valueUsageContext": {
+              "code": {
+                "system": "http://terminology.hl7.org/CodeSystem/usage-context-type",
+                "code": "program"
+              },
+              "valueCodeableConcept": {
+                "coding": [
+                  {
+                    "system": "http://labcorp.com/fhir/patient-portal-cds/CodeSystem/program",
+                    "code": "patient-portal-results"
+                  }
+                ]
+              }
+            }
+          },
+          {
+            "name": "Composition",
+            "valueCanonical": "http://labcorp.com/fhir/patient-portal-cds/StructureDefinition/composition-results-view"
+          }
+        ]
+      }
+    }
+  ]
+}
