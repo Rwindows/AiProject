@@ -243,19 +243,20 @@ def generate_boundary_values(min_value, max_value, steps=7):
     return final_values
 
 
-def fetch_library_data(library_id, base_url="https://cdsa-cds-api-execution-dev.ald6h.cws.labcorp.com/Library/"):
+def fetch_library_data(library_id, base_url="https://cdsa-lvs-hapi-fhir-qa.ald6h.cws.labcorp.com/fhir/Library/",
+                       post_url="https://cdsa-cds-api-execution-qa.ald6h.cws.labcorp.com/"):
     """
     Fetch library data from the specified URL, extract and decode the ELM JSON content.
+    Then make a POST request to the post_url with the decoded ELM JSON.
 
     Args:
         library_id: The library ID to fetch
         base_url: Base URL for the library API
+        post_url: URL to send the POST request to
 
     Returns:
-        The decoded ELM JSON if successful, None otherwise
+        Tuple of (elm_json, post_response): The decoded ELM JSON and POST response if successful, (None, None) otherwise
     """
-    print(f"Getting the base_url {base_url}...")
-
     url = f"{base_url}{library_id}"
 
     try:
@@ -266,14 +267,14 @@ def fetch_library_data(library_id, base_url="https://cdsa-cds-api-execution-dev.
         if response.status_code != 200:
             print(f"Error: Failed to fetch data. Status code: {response.status_code}")
             print(f"Response: {response.text}")
-            return None
+            return None, None
 
         # Parse the response JSON
         try:
             data = response.json()
         except json.JSONDecodeError:
             print(f"Error: Response is not valid JSON: {response.text[:200]}...")
-            return None
+            return None, None
 
         # Find the contentType: "application/elm+json" entry
         elm_content = None
@@ -285,7 +286,7 @@ def fetch_library_data(library_id, base_url="https://cdsa-cds-api-execution-dev.
 
         if not elm_content:
             print("Error: No 'application/elm+json' content found in the response")
-            return None
+            return None, None
 
         # Decode base64 content
         try:
@@ -298,15 +299,40 @@ def fetch_library_data(library_id, base_url="https://cdsa-cds-api-execution-dev.
                 json.dump(elm_json, f, indent=2)
 
             print(f"Decoded ELM JSON saved to {elm_filename}")
-            return elm_json
+
+            # Make POST request to the specified URL with the decoded ELM JSON
+            print(f"Making POST request to {post_url} with decoded ELM JSON...")
+            headers = {'Content-Type': 'application/json',
+                       'Accept': 'application/json'
+                       }
+            post_response = requests.post(post_url, json=elm_json, headers=headers)
+
+            if post_response.status_code >= 200 and post_response.status_code < 300:
+                print(f"POST request successful: Status code {post_response.status_code}")
+                try:
+                    post_response_data = post_response.json()
+                    post_response_filename = f"post_response_{library_id}.json"
+                    with open(post_response_filename, 'w') as f:
+                        json.dump(post_response_data, f, indent=2)
+                    print(f"POST response saved to {post_response_filename}")
+                except json.JSONDecodeError:
+                    print("POST response is not JSON. Response text saved.")
+                    with open(f"post_response_{library_id}.txt", 'w') as f:
+                        f.write(post_response.text)
+            else:
+                print(f"POST request failed: Status code {post_response.status_code}")
+                print(f"Response: {post_response.text[:200]}...")
+                post_response = None
+
+            return elm_json, post_response
 
         except Exception as e:
-            print(f"Error decoding base64 content: {e}")
-            return None
+            print(f"Error processing content: {e}")
+            return None, None
 
     except Exception as e:
         print(f"Error fetching library data: {e}")
-        return None
+        return None, None
 
 
 def create_test_files(original_data: Dict, display_value: str, test_values: List[float],
@@ -383,7 +409,7 @@ def create_test_files(original_data: Dict, display_value: str, test_values: List
 
         # Add ELM JSON if provided
         if library_elm_json:
-            variant_data['elmJson'] = library_elm_json
+            variant_data['elm'] = library_elm_json
 
         # Save the variant file with interpretation in the filename
         output_file = f"{output_dir}/{safe_name}_value_{value}_interp_{interpretation_code}.json"
@@ -393,7 +419,8 @@ def create_test_files(original_data: Dict, display_value: str, test_values: List
 
 
 def process_excel_input(excel_path, fhir_input, output_dir,
-                        base_url="https://cdsa-cds-api-execution-dev.ald6h.cws.labcorp.com/Library/"):
+                        base_url="https://cdsa-lvs-hapi-fhir-qa.ald6h.cws.labcorp.com/fhir/Library",
+                        post_url="https://cdsa-cds-api-execution-qa.ald6h.cws.labcorp.com/"):
     """
     Process test scenarios defined in an Excel file.
 
@@ -478,7 +505,7 @@ def process_excel_input(excel_path, fhir_input, output_dir,
                 # If we have a library ID, fetch the ELM JSON
                 if library_id:
                     print(f"Fetching library data for ID: {library_id}")
-                    library_elm_json = fetch_library_data(library_id, base_url)
+                    library_elm_json, post_response = fetch_library_data(library_id, base_url, post_url)
                     if not library_elm_json:
                         print(f"Warning: Failed to fetch library data for ID {library_id}, continuing without it")
 
@@ -569,8 +596,10 @@ def main():
     # Common arguments
     parser.add_argument('--input', '-i', required=True, help='Input FHIR JSON file path')
     parser.add_argument('--output', '-o', default='test_files', help='Output directory for test files')
-    parser.add_argument('--base-url', default="https://cdsa-cds-api-execution-dev.ald6h.cws.labcorp.com/Library/",
+    parser.add_argument('--base-url', default="https://cdsa-lvs-hapi-fhir-qa.ald6h.cws.labcorp.com/fhir/Library/",
                         help='Base URL for library API (default: %(default)s)')
+    parser.add_argument('--post-url', default="https://cdsa-cds-api-execution-qa.ald6h.cws.labcorp.com/",
+                        help='URL to send POST requests with ELM JSON (default: %(default)s)')
 
     # Direct argument mode arguments
     parser.add_argument('--range', '-r', help='Value range for boundary tests (e.g., "232-1245")')
@@ -584,7 +613,7 @@ def main():
 
     # If Excel mode is selected
     if args.excel:
-        process_excel_input(args.excel, args.input, args.output, args.base_url)
+        process_excel_input(args.excel, args.input, args.output, args.base_url, args.post_url)
     else:
         # Original direct argument mode
         if not args.range:
@@ -615,9 +644,10 @@ def main():
 
         # Fetch library data if library ID is provided
         library_elm_json = None
+        post_response = None
         if args.library_id:
             print(f"Fetching library data for ID: {args.library_id}")
-            library_elm_json = fetch_library_data(args.library_id, args.base_url)
+            library_elm_json, post_response = fetch_library_data(args.library_id, args.base_url, args.post_url)
             if not library_elm_json:
                 print(f"Warning: Failed to fetch library data for ID {args.library_id}, continuing without it")
 
